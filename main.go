@@ -1,4 +1,4 @@
-package handler
+package main
 
 import (
 	"encoding/json"
@@ -13,7 +13,7 @@ const (
 	ipInfoAPIURL         = "https://ipinfo.io/"
 	ipInfoAPIKey         = "b54ee3d6c3c552"           
 	openWeatherMapAPIURL = "https://api.openweathermap.org/data/2.5/weather"
-	openWeatherMapAPIKey = "a947cd07b70b649ccf74dc1b5df94bb1" 
+	openWeatherMapAPIKey = "a947cd07b70b649ccf74dc1b5df94bb1"
 )
 
 type Location struct {
@@ -129,16 +129,7 @@ func respHandler(resp http.ResponseWriter, req *http.Request) {
 	fmt.Println(response)
 }
 
-// func main() {
-// 	port := os.Getenv("PORT")
-// 	if port == "" {
-// 		port = "8080"
-// 	}
-
-// 	http.HandleFunc("/", respHandler)
-// 	log.Fatal(http.ListenAndServe(":"+port, nil))
-// }
+// Handler is the exported function that Vercel will use
 func Handler(w http.ResponseWriter, r *http.Request) {
-	//respHandler(w, r)
-	fmt.Fprintf(w, "<h1>Hello from Go!</h1>")
+	respHandler(w, r)
 }
