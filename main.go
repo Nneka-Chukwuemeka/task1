@@ -4,10 +4,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-	"log"
 	"net/http"
 	"net/url"
-	"os"
 	"strings"
 )
 
@@ -131,12 +129,15 @@ func respHandler(resp http.ResponseWriter, req *http.Request) {
 	fmt.Println(response)
 }
 
-func main() {
-	port := os.Getenv("PORT")
-	if port == "" {
-		port = "8080"
-	}
+// func main() {
+// 	port := os.Getenv("PORT")
+// 	if port == "" {
+// 		port = "8080"
+// 	}
 
-	http.HandleFunc("/", respHandler)
-	log.Fatal(http.ListenAndServe(":"+port, nil))
+// 	http.HandleFunc("/", respHandler)
+// 	log.Fatal(http.ListenAndServe(":"+port, nil))
+// }
+func Handler(w http.ResponseWriter, r *http.Request) {
+	respHandler(w, r)
 }
