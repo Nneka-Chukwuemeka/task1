@@ -8,9 +8,8 @@
 	],
 	"routes": [
 		{
-			"src": "/*",
-			"dest": "main"
+			"src": "/(.*)",
+			"dest": "main.go"
 		}
-	],
-	"alias": "https://task-nine-black.vercel.app/api/hello"
+	]
 }
