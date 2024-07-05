@@ -12,10 +12,5 @@
 			"dest": "main"
 		}
 	],
-	"alias": [
-		{
-			"source": "/api/hello",
-			"destination": "/api/hello"
-		}
-	]
+	"alias": "https://task-nine-black.vercel.app/api/hello"
 }
