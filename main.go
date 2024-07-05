@@ -107,10 +107,6 @@ func respHandler(resp http.ResponseWriter, req *http.Request) {
 		return
 	}
 
-	// Split the "loc" field into latitude and longitude
-	var latitude, longitude float64
-	fmt.Sscanf(location.Location, "%f,%f", &latitude, &longitude)
-
 	// Extract visitor name from query parameters
 	query := req.URL.Query()
 	visitor := query.Get("visitor")
@@ -119,14 +115,17 @@ func respHandler(resp http.ResponseWriter, req *http.Request) {
 		visitor = "Guest"
 	}
 
-	response := fmt.Sprintf(
-		"Hello %s, the temperature is %.2f degrees Celsius in %s.\nIP: %s\nCity: %s\nRegion: %s\nCountry: %s\nLatitude: %f\nLongitude: %f\n",
-		visitor, weather.Main.Temp, location.City, location.IP, location.City, location.Region, location.Country, latitude, longitude,
-	)
+	response := map[string]interface{}{
+		"client_ip": clientIp,
+		"location":  location.City,
+		"greeting":  fmt.Sprintf("Hello, %s!, the temperature is %.2f degrees Celsius in %s", visitor, weather.Main.Temp, location.City),
+	}
 
-	fmt.Fprint(resp, response)
+	resp.Header().Set("Content-Type", "application/json")
+	json.NewEncoder(resp).Encode(response)
+
 	fmt.Println("New IP:", clientIp)
-	fmt.Println(response)
+	fmt.Printf("Response: %+v\n", response)
 }
 
 // Handler is the exported function that Vercel will use
