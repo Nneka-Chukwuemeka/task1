@@ -139,5 +139,6 @@ func respHandler(resp http.ResponseWriter, req *http.Request) {
 // 	log.Fatal(http.ListenAndServe(":"+port, nil))
 // }
 func Handler(w http.ResponseWriter, r *http.Request) {
-	respHandler(w, r)
+	//respHandler(w, r)
+	fmt.Fprintf(w, "<h1>Hello from Go!</h1>")
 }
