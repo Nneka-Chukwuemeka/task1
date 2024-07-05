@@ -11,7 +11,7 @@ import (
 
 const (
 	ipInfoAPIURL         = "https://ipinfo.io/"
-	ipInfoAPIKey         = "b54ee3d6c3c552"           
+	ipInfoAPIKey         = "b54ee3d6c3c552"
 	openWeatherMapAPIURL = "https://api.openweathermap.org/data/2.5/weather"
 	openWeatherMapAPIKey = "a947cd07b70b649ccf74dc1b5df94bb1"
 )
@@ -83,7 +83,7 @@ func getWeather(city string) (*Weather, error) {
 	return &weather, nil
 }
 
-func respHandler(resp http.ResponseWriter, req *http.Request) {
+func helloHandler(resp http.ResponseWriter, req *http.Request) {
 	clientIp := getIpAddr(req)
 	if strings.Contains(clientIp, ":") {
 		// If the IP address contains a port, remove the port
@@ -130,5 +130,5 @@ func respHandler(resp http.ResponseWriter, req *http.Request) {
 
 // Handler is the exported function that Vercel will use
 func Handler(w http.ResponseWriter, r *http.Request) {
-	respHandler(w, r)
+	helloHandler(w, r)
 }
