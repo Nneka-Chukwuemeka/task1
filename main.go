@@ -1,4 +1,4 @@
-package main
+package handler
 
 import (
 	"encoding/json"
@@ -137,14 +137,9 @@ func helloHandler(resp http.ResponseWriter, req *http.Request) {
 // 	helloHandler(w, r)
 // }
 func Handler(w http.ResponseWriter, r *http.Request) {
-	helloHandler(w, r)
-  // Your logic to handle requests to /api/hello
-  fmt.Println("Hello from your Go API at /api/hello!")
-  // ... (rest of your handler logic)
+	 http.HandleFunc("/api/hello", helloHandler)
+ 	 fmt.Println("Server listening on port 8080")
+ 	 http.ListenAndServe(":8080", nil)
 }
 
-func main() {
-  http.HandleFunc("/api/hello", Handler)
-  fmt.Println("Server listening on port 8080")
-  http.ListenAndServe(":8080", nil)
-}
+
