@@ -9,7 +9,7 @@
 	"routes": [
 		{
 			"src": "/api/hello",
-			"dest": "main.go"
+			"dest": "/api/hello"
 		}
 	]
 }
