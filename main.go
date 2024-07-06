@@ -1,4 +1,4 @@
-package handler
+package main
 
 import (
 	"encoding/json"
@@ -129,7 +129,22 @@ func helloHandler(resp http.ResponseWriter, req *http.Request) {
 }
 
 // Handler is the exported function that Vercel will use
+// func Handler(w http.ResponseWriter, r *http.Request) {
+// 	if r.URL.Path != "/api/hello" {
+//     http.NotFound(w, r)
+//     return
+//   }
+// 	helloHandler(w, r)
+// }
 func Handler(w http.ResponseWriter, r *http.Request) {
-	http.HandleFunc("/api/hello", helloHandler)
+	helloHandler(w, r)
+  // Your logic to handle requests to /api/hello
+  fmt.Println("Hello from your Go API at /api/hello!")
+  // ... (rest of your handler logic)
 }
 
+func main() {
+  http.HandleFunc("/api/hello", Handler)
+  fmt.Println("Server listening on port 8080")
+  http.ListenAndServe(":8080", nil)
+}
