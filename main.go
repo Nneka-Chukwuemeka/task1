@@ -129,17 +129,10 @@ func helloHandler(resp http.ResponseWriter, req *http.Request) {
 }
 
 // Handler is the exported function that Vercel will use
-// func Handler(w http.ResponseWriter, r *http.Request) {
-// 	if r.URL.Path != "/api/hello" {
-//     http.NotFound(w, r)
-//     return
-//   }
-// 	helloHandler(w, r)
-// }
 func Handler(w http.ResponseWriter, r *http.Request) {
-	 http.HandleFunc("/api/hello", helloHandler)
- 	 fmt.Println("Server listening on port 8080")
- 	 http.ListenAndServe(":8080", nil)
+	if r.URL.Path != "/api/hello" {
+		http.NotFound(w, r)
+		return
+	}
+	helloHandler(w, r)
 }
-
-
