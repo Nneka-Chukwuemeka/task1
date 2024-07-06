@@ -130,6 +130,6 @@ func helloHandler(resp http.ResponseWriter, req *http.Request) {
 
 // Handler is the exported function that Vercel will use
 func Handler(w http.ResponseWriter, r *http.Request) {
-	helloHandler(w, r)
+	http.HandleFunc("/api/hello", helloHandler)
 }
 
